@@ -1,4 +1,4 @@
-package com.trinh.threadversiontwo.Entity;
+package com.trinh.thread.Entity;
 
 import jakarta.persistence.*;
 import lombok.AccessLevel;
@@ -8,27 +8,23 @@ import lombok.NoArgsConstructor;
 import lombok.experimental.FieldDefaults;
 
 import java.time.LocalDateTime;
-import java.util.Date;
 
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
 @Entity
 @FieldDefaults(level = AccessLevel.PRIVATE)
-public class Follow {
+public class Post {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(nullable = false)
-    int followId;
+    int postId;
 
     @Column(nullable = false)
     int userId;
 
-    @Column(nullable = false)
-    int followedUserId;
-
-    @Column(nullable = false)
-    boolean isFollowed;
-
+    String imageUrls;
+    String caption;
     LocalDateTime createdAt;
+    boolean isDeleted;
 }

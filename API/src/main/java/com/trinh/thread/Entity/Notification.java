@@ -1,4 +1,4 @@
-package com.trinh.threadversiontwo.Entity;
+package com.trinh.thread.Entity;
 
 import jakarta.persistence.*;
 import lombok.AccessLevel;
@@ -8,28 +8,26 @@ import lombok.NoArgsConstructor;
 import lombok.experimental.FieldDefaults;
 
 import java.time.LocalDateTime;
-import java.util.Date;
 
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
 @Entity
 @FieldDefaults(level = AccessLevel.PRIVATE)
-public class Repost {
+public class Notification {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(nullable = false)
-    int repostId;
+    int notificationId;
 
     @Column(nullable = false)
     int userId;
 
     @Column(nullable = false)
-    int originalPostId;
+    int targetId;
 
-    @Column(nullable = false)
-    int commentId;
-
+    String type;
+    String content;
     LocalDateTime createdAt;
-    boolean isDeleted;
+    boolean isRead;
 }

@@ -1,6 +1,6 @@
-package com.trinh.threadversiontwo.Repository;
+package com.trinh.thread.Repository;
 
-import com.trinh.threadversiontwo.Entity.Like;
+import com.trinh.thread.Entity.Like;
 import org.springframework.data.jpa.repository.JpaRepository;
 
 public interface LikeRepository extends JpaRepository<Like, Integer> {

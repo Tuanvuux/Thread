@@ -1,6 +1,6 @@
-package com.trinh.threadversiontwo.Repository;
+package com.trinh.thread.Repository;
 
-import com.trinh.threadversiontwo.Entity.Comment;
+import com.trinh.thread.Entity.Comment;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 

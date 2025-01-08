@@ -1,4 +1,4 @@
-package com.trinh.threadversiontwo;
+package com.trinh.thread;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;

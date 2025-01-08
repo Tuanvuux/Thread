@@ -1,4 +1,4 @@
-package com.trinh.threadversiontwo.Entity;
+package com.trinh.thread.Entity;
 
 import jakarta.persistence.*;
 import lombok.AccessLevel;
@@ -15,25 +15,27 @@ import java.util.Date;
 @AllArgsConstructor
 @Entity
 @FieldDefaults(level = AccessLevel.PRIVATE)
-@Table(name = "user_likes")
-public class Like {
+public class User {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(nullable = false)
-    int likeId;
-
-    @Column(nullable = false)
-    int postId;
-
-    @Column(nullable = false)
     int userId;
-
-    @Column(nullable = false)
-    int commentId;
-
-    @Column(nullable = false)
+    String username;
+    String email;
+    String phoneNumber;
+    String password;
+    Date dateOfBirth;
+    String displayName;
+    String bio;
+    String avatarUrl;
+    String coverUrl;
+    LocalDateTime updatedAt;
+    String status;
+    boolean isVerified;
+    LocalDateTime lastLoginAt;
+    String role;
+    boolean isDeleted;
     LocalDateTime createdAt;
 
-    @Column(nullable = false)
-    boolean isDeleted;
+
 }
