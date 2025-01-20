@@ -7,7 +7,6 @@ public class WebConfig implements WebMvcConfigurer {
 
     @Override
     public void addCorsMappings(CorsRegistry registry) {
-        // Cho phép truy cập từ frontend tại localhost:3000
         registry.addMapping("/api/**")
                 .allowedOrigins("http://localhost:3000") // Chỉ chấp nhận yêu cầu từ frontend React
                 .allowedMethods("GET", "POST", "PUT", "DELETE", "OPTIONS")
