@@ -1,5 +1,6 @@
 package com.trinh.thread.Controller;
 
+import com.trinh.thread.DTO.PostDTO;
 import com.trinh.thread.Entity.Post;
 import com.trinh.thread.Service.PostService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -11,6 +12,7 @@ import java.util.List;
 
 @RestController
 @RequestMapping("/api/posts")
+@CrossOrigin(origins = "http://localhost:3000")
 public class PostController {
 
     @Autowired
@@ -45,7 +47,7 @@ public class PostController {
     @GetMapping("")
     public ResponseEntity<?> getAllPosts() {
         try {
-            List<Post> posts = postService.getAllPosts();
+            List<PostDTO> posts = postService.getAllPosts();
             return ResponseEntity.ok(posts);
         } catch (Exception e) {
             return ResponseEntity.status(500).body("Error fetching posts: " + e.getMessage());

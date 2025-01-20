@@ -1,8 +1,12 @@
 package com.trinh.thread.Service;
+import com.trinh.thread.DTO.Account;
+import com.trinh.thread.DTO.PostDTO;
 import com.trinh.thread.Entity.Image;
 import com.trinh.thread.Entity.Post;
+import com.trinh.thread.Entity.User;
 import com.trinh.thread.Repository.ImageRepository;
 import com.trinh.thread.Repository.PostRepository;
+import com.trinh.thread.Repository.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
@@ -11,6 +15,7 @@ import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
+import java.time.Duration;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
@@ -22,9 +27,10 @@ public class PostService {
 
     @Autowired
     private PostRepository postRepository;
-
     @Autowired
     private ImageRepository imageRepository;
+    @Autowired
+    private UserRepository userRepository;
 
     private final String uploadDir = "uploads/";
 
@@ -67,14 +73,37 @@ public class PostService {
         Optional<Post> post = postRepository.findById(id); // Sử dụng findById nếu bạn dùng JPA
         return post.orElse(null);
     }
-
-    public List<Post> getAllPosts() {
-        List<Post> posts = postRepository.findAll();  // Lấy tất cả bài đăng
-        for (Post post : posts) {
-            // Lấy tất cả ảnh của bài đăng
-            List<Image> images = imageRepository.findByPostId(post.getPostId());
-            post.setImages(images);  // Giả sử bạn thêm trường `images` vào Post Entity
+    public String setCreatedTime(Post post) {
+        LocalDateTime currentTime = LocalDateTime.now();
+        String createdTime;
+        Duration duration = Duration.between(currentTime, post.getCreatedAt());
+        if(duration.toDays()>0){
+            createdTime = duration.toDays() + " ngày";
+        } else if (duration.toHours()>0) {
+            createdTime = duration.toHours() + " giờ";
+        } else if (duration.toMinutes()>0) {
+            createdTime = duration.toMinutes() + " phút";
+        }else {
+            createdTime = "1 phút";
         }
-        return posts;
+        return createdTime;
+    }
+    public List<PostDTO> getAllPosts() {
+        List<PostDTO> listPost = new  ArrayList<>();
+        List<Post> posts = postRepository.findAll();
+        for (Post post : posts) {
+            List<Image> images = imageRepository.findByPostId(post.getPostId());
+            Optional<User> user = userRepository.findById(post.getUserId());
+            PostDTO postDTO = new PostDTO();
+            postDTO.setPostId(post.getPostId());
+            postDTO.setCaption(post.getCaption());
+            postDTO.setImages(images);
+            postDTO.setPostedTime(setCreatedTime(post));
+            postDTO.setUserId(post.getUserId());
+            postDTO.setAvatarUrl(user.get().getAvatarUrl());
+            postDTO.setDisplayName(user.get().getDisplayName());
+            listPost.add(postDTO);
+        }
+        return listPost;
     }
 }
