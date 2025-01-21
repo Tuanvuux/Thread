@@ -76,18 +76,20 @@ public class PostService {
     public String setCreatedTime(Post post) {
         LocalDateTime currentTime = LocalDateTime.now();
         String createdTime;
-        Duration duration = Duration.between(currentTime, post.getCreatedAt());
-        if(duration.toDays()>0){
+        Duration duration = Duration.between(post.getCreatedAt(), currentTime); // Đổi vị trí để tính từ quá khứ đến hiện tại
+
+        if (duration.toDays() > 0) {
             createdTime = duration.toDays() + " ngày";
-        } else if (duration.toHours()>0) {
+        } else if (duration.toHours() > 0) {
             createdTime = duration.toHours() + " giờ";
-        } else if (duration.toMinutes()>0) {
+        } else if (duration.toMinutes() > 0) {
             createdTime = duration.toMinutes() + " phút";
-        }else {
-            createdTime = "1 phút";
+        } else {
+            createdTime = "Vừa mới";
         }
         return createdTime;
     }
+
     public List<PostDTO> getAllPosts() {
         List<PostDTO> listPost = new  ArrayList<>();
         List<Post> posts = postRepository.findAll();
