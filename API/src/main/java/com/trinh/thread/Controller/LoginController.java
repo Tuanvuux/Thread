@@ -24,6 +24,8 @@ public class LoginController {
             return ResponseEntity.status(HttpStatus.UNAUTHORIZED)
                     .body("Tên đăng nhập hoặc mật khẩu không chính xác!");
         }
+
+        // Đăng nhập thành công, trả về thông tin người dùng
         return ResponseEntity.ok(user);
     }
 }
