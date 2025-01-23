@@ -24,6 +24,8 @@ public class UserService {
         }
 
         // Mã hóa mật khẩu
+        String password = user.getPassword();
+        String encodedPassword = passwordEncoder.encode(user.getPassword());
         user.setPassword(passwordEncoder.encode(user.getPassword()));
         userRepository.save(user);
     }
