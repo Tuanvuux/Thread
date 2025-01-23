@@ -1,5 +1,6 @@
 package com.trinh.thread.Controller;
 
+import com.trinh.thread.DTO.TokenResponse;
 import com.trinh.thread.Service.LoginService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -26,6 +27,6 @@ public class LoginController {
         }
 
         // Đăng nhập thành công, trả về token
-        return ResponseEntity.ok(token);
+        return ResponseEntity.ok(new TokenResponse(token) );
     }
 }

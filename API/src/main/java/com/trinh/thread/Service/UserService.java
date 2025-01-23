@@ -1,4 +1,5 @@
 package com.trinh.thread.Service;
+import com.trinh.thread.DTO.UserInforDTO;
 import com.trinh.thread.Entity.User;
 import com.trinh.thread.Repository.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -28,5 +29,12 @@ public class UserService {
         String encodedPassword = passwordEncoder.encode(user.getPassword());
         user.setPassword(passwordEncoder.encode(user.getPassword()));
         userRepository.save(user);
+    }
+
+    public UserInforDTO findByUsername(String username){
+        UserInforDTO userInforDTO = new UserInforDTO();
+        User user = userRepository.findByUsername(username);
+
+        return userInforDTO;
     }
 }
