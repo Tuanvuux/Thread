@@ -34,7 +34,18 @@ public class UserService {
     public UserInforDTO findByUsername(String username){
         UserInforDTO userInforDTO = new UserInforDTO();
         User user = userRepository.findByUsername(username);
-
+        userInforDTO.setUserId(user.getUserId());
+        userInforDTO.setUsername(user.getUsername());
+        userInforDTO.setEmail(user.getEmail());
+        userInforDTO.setBio(user.getBio());
+        userInforDTO.setRole(user.getRole());
+        userInforDTO.setAvatarUrl(user.getAvatarUrl());
+        userInforDTO.setCoverUrl(user.getCoverUrl());
+        userInforDTO.setCreatedAt(user.getCreatedAt());
+        userInforDTO.setDateOfBirth(user.getDateOfBirth());
+        userInforDTO.setDisplayName(user.getDisplayName());
+        userInforDTO.setPhoneNumber(user.getPhoneNumber());
+        userInforDTO.setVerified(user.isVerified());
         return userInforDTO;
     }
 }
