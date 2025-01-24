@@ -1,4 +1,6 @@
 package com.trinh.thread.Controller;
+import com.trinh.thread.DTO.UserInforDTO;
+import com.trinh.thread.Entity.User;
 import com.trinh.thread.Jwt.JwtUtil;
 import com.trinh.thread.Service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -31,7 +33,8 @@ public class UserController {
 
         // Lấy thông tin người dùng từ username
         if (username != null) {
-            return ResponseEntity.ok(userService.findByUsername(username)); // Giả sử bạn có một method trong UserService
+            UserInforDTO user = userService.findByUsername(username);
+            return ResponseEntity.ok(user); // Giả sử bạn có một method trong UserService
         }
 
         return ResponseEntity.status(401).body("Invalid token");
